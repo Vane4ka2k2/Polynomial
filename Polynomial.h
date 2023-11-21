@@ -47,6 +47,12 @@ public:
 
 	//основные методы
 
+	//input
+	//	Polynomial - делитель
+	//output
+	//	pair - частное, остаток
+	std::pair<Polynomial, Polynomial> division(const Polynomial& other);
+
 	//output
 	//	Polynomial - производная многочлена
 	Polynomial derivative() const; //метод взятия производной
@@ -58,7 +64,7 @@ public:
 	Polynomial gcd(const Polynomial& other) const; //метод нахождения НОД двух многочленов
 
 	//output
-	//	Poynomial - многочлен без кратных корней
+	//	Polynomial - многочлен без кратных корней
 	Polynomial removeMultiplicity() const; //метод устранения кратности корней
 
 	//input

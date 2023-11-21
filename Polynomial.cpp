@@ -318,6 +318,11 @@ Polynomial Polynomial::operator%(const Polynomial& other) const
 	return result;
 }
 
+std::pair<Polynomial, Polynomial> Polynomial::division(const Polynomial& other)
+{
+	return std::pair<Polynomial, Polynomial>(*this / other, *this % other);
+}
+
 Polynomial Polynomial::derivative() const
 {
 	std::vector<double> resultVector(coefficients.size() - 1, 0.0);
