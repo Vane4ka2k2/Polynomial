@@ -230,7 +230,7 @@ Polynomial Polynomial::operator*(const double& other) const
 {
 	std::vector<double> resultVector(coefficients);
 
-	for (size_t i = 0; i < coefficients[i]; ++i)
+	for (size_t i = 0; i < coefficients.size(); ++i)
 	{
 		resultVector[i] *= other;
 	}
@@ -435,6 +435,33 @@ double Polynomial::methodChordsAndTangents(double lValue, double rValue) const
 	}
 
 	return ((lValue + rValue) / 2);
+}
+
+Polynomial Polynomial::methodLagrange(std::vector<double> vecX) const
+{
+	std::vector<double> vecY;
+	for (size_t i = 0; i < vecX.size(); ++i)
+	{
+		vecY.push_back(this->valueCalc(vecX[i]));
+	}
+
+	Polynomial L({ 0 });
+	for (size_t i = 0; i < vecX.size(); ++i)
+	{
+		Polynomial P({ 1 });
+		for (size_t j = 0; j < vecX.size(); ++j)
+		{
+			if (i != j)
+			{
+				Polynomial numerator({ -vecX[j], 1});
+				Polynomial denominator({ vecX[i] - vecX[j] });
+				P = P * (numerator / denominator);
+			}
+		}
+		L = L + P * vecY[i];
+	}
+
+	return L;
 }
 
 std::istream& operator>>(std::istream& is, Polynomial& poly)

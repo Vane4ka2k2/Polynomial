@@ -6,18 +6,17 @@ int main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	Polynomial p1;
-	Polynomial p2;
+	vector<double> coeffs{ 2, -5 / 2, 0, 0.5 };
+	vector<double> vecX{ -1, 0, 1, 2 };
+	Polynomial p1(coeffs);
+	Polynomial p2 = p1.methodLagrange(vecX);
 
-	cin >> p1;
-	cin >> p2;
-
-	pair<Polynomial, Polynomial> p34 = p1.division(p2);
-
-	cout << "Первый многочлен: " << p1 << endl;
-	cout << "Второй многочлен: " << p2 << endl;
-	cout << "Частное: " << p34.first << endl;
-	cout << "Остаток: " << p34.second << endl;
+	cout << "Исходный многочлен: " << p1 << endl;
+	cout << "Вектор Иксов: ";
+	for (auto i : vecX)
+		cout << i << " ";
+	cout << endl;
+	cout << "Интерполяционный многочлен Лагранжа: " << p2 << endl;
 
 	system("pause");
 

@@ -86,4 +86,10 @@ public:
 	//output
 	//	double - примерное значение точки
 	double methodChordsAndTangents(double lValue, double rValue) const; //комбинированный метод хорд и касательных
+
+	//input
+	//	vector<double> - массив иксов
+	//output
+	//	Polynomial - Интерполяционный многочлен
+	Polynomial methodLagrange(std::vector<double> vecX) const;
 };
