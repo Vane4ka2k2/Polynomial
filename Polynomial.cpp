@@ -97,6 +97,32 @@ void Polynomial::print() const
 	}
 }
 
+void Polynomial::fileInput(std::string filename)
+{
+	std::ifstream input(filename);
+
+	if (input.is_open())
+	{
+		coefficients.clear();
+		int degree = 0;
+		input >> degree;
+
+		for (size_t i = 0; i < degree; ++i)
+		{
+			int value;
+			input >> value;
+			coefficients.push_back(value);
+		}
+	}
+	else
+	{
+		std::cout << "Ошибка открытия файла!\n";
+		coefficients = { 0 };
+	}
+
+	input.close();
+}
+
 bool Polynomial::operator!=(const Polynomial& other) const
 {
 	return coefficients != other.coefficients;
@@ -437,7 +463,28 @@ double Polynomial::methodChordsAndTangents(double lValue, double rValue) const
 	return ((lValue + rValue) / 2);
 }
 
-Polynomial Polynomial::methodLagrange(std::vector<double> vecX) const
+//Polynomial Polynomial::polynomialNewton(std::vector<double> vecX) const
+//{
+//	std::vector<double> vecY;
+//	for (size_t i = 0; i < vecY.size(); ++i)
+//	{
+//		vecY.push_back(this->valueCalc(vecX[i]));
+//	}
+//
+//	std::vector<std::vector<double>> divDiff;
+//	for (size_t i = 0; i < vecY.size(); ++i)
+//	{
+//		divDiff.resize(vecY.size());
+//		for (size_t j = 0; j < vecY.size(); ++j)
+//		{
+//
+//		}
+//	}
+//
+//	return Polynomial();
+//}
+
+Polynomial Polynomial::polynomialLagrange(std::vector<double> vecX) const
 {
 	std::vector<double> vecY;
 	for (size_t i = 0; i < vecX.size(); ++i)
@@ -460,8 +507,16 @@ Polynomial Polynomial::methodLagrange(std::vector<double> vecX) const
 		}
 		L = L + P * vecY[i];
 	}
+	
+	L.roundCoefficients(); //округление коэффициентов
+	L.removeLeadingZeros(); //удаление незначащих нулей
 
 	return L;
+}
+
+double Polynomial::divDifference(double x0, double x1) const
+{
+	return (this->valueCalc(x1) - this->valueCalc(x0)) / (x1 - x0);
 }
 
 std::istream& operator>>(std::istream& is, Polynomial& poly)

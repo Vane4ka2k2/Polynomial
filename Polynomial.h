@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <vector>
+#include <fstream>
 
 class Polynomial
 {
@@ -24,6 +25,7 @@ public:
 
 	void input(); //ввод многочлена с клавиатуры
 	void print() const; //вывод многочлена в консоль
+	void fileInput(std::string filename); //ввод многочлена с файла
 	friend std::istream& operator>>(std::istream& is, Polynomial& poly); //перегрузка оператора >> для istream
 	friend std::ostream& operator<<(std::ostream& os, Polynomial& poly); //перегрузка оператора << для ostream
 
@@ -87,9 +89,13 @@ public:
 	//	double - примерное значение точки
 	double methodChordsAndTangents(double lValue, double rValue) const; //комбинированный метод хорд и касательных
 
+	//Polynomial polynomialNewton(std::vector<double> vecX) const;
+
 	//input
 	//	vector<double> - массив иксов
 	//output
 	//	Polynomial - Интерполяционный многочлен
-	Polynomial methodLagrange(std::vector<double> vecX) const;
+	Polynomial polynomialLagrange(std::vector<double> vecX) const;
+
+	double divDifference(double x0, double x1) const;
 };
