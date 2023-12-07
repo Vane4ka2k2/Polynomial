@@ -463,26 +463,51 @@ double Polynomial::methodChordsAndTangents(double lValue, double rValue) const
 	return ((lValue + rValue) / 2);
 }
 
-//Polynomial Polynomial::polynomialNewton(std::vector<double> vecX) const
-//{
-//	std::vector<double> vecY;
-//	for (size_t i = 0; i < vecY.size(); ++i)
-//	{
-//		vecY.push_back(this->valueCalc(vecX[i]));
-//	}
-//
-//	std::vector<std::vector<double>> divDiff;
-//	for (size_t i = 0; i < vecY.size(); ++i)
-//	{
-//		divDiff.resize(vecY.size());
-//		for (size_t j = 0; j < vecY.size(); ++j)
-//		{
-//
-//		}
-//	}
-//
-//	return Polynomial();
-//}
+Polynomial Polynomial::polynomialNewton(std::vector<double> vecX) const
+{
+	std::vector<double> vecY;
+	for (size_t i = 0; i < vecX.size(); ++i)
+	{
+		vecY.push_back(valueCalc(vecX[i]));
+	}
+
+	Polynomial n_poly({ 1 });
+
+	Polynomial result({ vecY[0] });
+	std::vector<std::vector<double>> f(vecX.size(), std::vector<double>(vecX.size() - 1, 0));
+
+	int n = vecX.size() - 1, k = 0;
+
+	for (size_t i = 1; i < vecX.size(); ++i)
+	{
+		n_poly = Polynomial({ 1 });
+		for (size_t j = 0; j < n; ++j)
+		{
+			if (i == 1)
+			{
+				f[i][j] = (vecY[j + 1] - vecY[j]) / (vecX[j + 1] - vecX[j]);
+			}
+			else
+			{
+				f[i][j] = (f[i - 1][j + 1] - f[i - 1][j]) / (vecX[j + k + 1] - vecX[j]);
+			}
+			if (j == 0)
+			{
+				for (size_t k = 0; k < i; ++k)
+				{
+					n_poly = n_poly * (Polynomial({ -vecX[k], 1 }));
+				}
+
+				n_poly = n_poly * f[i][j];
+				result = result + n_poly;
+			}
+		}
+		--n;
+		++k;
+	}
+
+	return result;
+}
 
 Polynomial Polynomial::polynomialLagrange(std::vector<double> vecX) const
 {
@@ -512,11 +537,6 @@ Polynomial Polynomial::polynomialLagrange(std::vector<double> vecX) const
 	L.removeLeadingZeros(); //удаление незначащих нулей
 
 	return L;
-}
-
-double Polynomial::divDifference(double x0, double x1) const
-{
-	return (this->valueCalc(x1) - this->valueCalc(x0)) / (x1 - x0);
 }
 
 std::istream& operator>>(std::istream& is, Polynomial& poly)

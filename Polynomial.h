@@ -89,13 +89,15 @@ public:
 	//	double - примерное значение точки
 	double methodChordsAndTangents(double lValue, double rValue) const; //комбинированный метод хорд и касательных
 
-	//Polynomial polynomialNewton(std::vector<double> vecX) const;
+	//input
+	//	vector<double> - массив иксов
+	//output
+	// Polynomial - Интерполяционный многочлен Ньютона
+	Polynomial polynomialNewton(std::vector<double> vecX) const;
 
 	//input
 	//	vector<double> - массив иксов
 	//output
-	//	Polynomial - Интерполяционный многочлен
+	//	Polynomial - Интерполяционный многочлен Лагранжа
 	Polynomial polynomialLagrange(std::vector<double> vecX) const;
-
-	double divDifference(double x0, double x1) const;
 };
