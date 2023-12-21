@@ -1,24 +1,24 @@
 #include "Polynomial.h"
+#include "myFunctions.h"
 #include <iostream>
+
 using namespace std;
 
 int main()
 {
 	setlocale(LC_ALL, "Russian");
 
-	vector<double> coeffs{ 2, -2.5, 0.5 };
-	vector<double> vecX{ -1, 0, 1, 2 };
-	Polynomial p1(coeffs);
-	Polynomial p2 = p1.polynomialNewton(vecX);
-	Polynomial p3 = p1.polynomialLagrange(vecX);
+    double lValue = 2, rValue = 5;
+    cout << "F(x) = 1 / log(x)\n";
+    cout << "Ð˜Ð½Ñ‚ÐµÐ³Ñ€Ð°Ð» Ð¾Ñ‚ 2 Ð´Ð¾ 5\n";
 
-	cout << "Èñõîäíûé ìíîãî÷ëåí: " << p1 << endl;
-	cout << "Âåêòîð Èêñîâ: ";
-	for (auto i : vecX)
-		cout << i << " ";
-	cout << endl;
-	cout << "Èíòåðïîëÿöèîííûé ìíîãî÷ëåí Íüþòîíà: " << p2 << endl;
-	cout << "Èíòåðïîëÿöèîííûé ìíîãî÷ëåí Ëàãðàíæà: " << p3 << endl;
+    double value1 = rectangleMethod(lValue, rValue, 100000);
+    double value2 = trapezoidMethod(lValue, rValue, 100000);
+    double value3 = simpsonsMethod(lValue, rValue, 100000);
+
+    cout << "ÐœÐµÑ‚Ð¾Ð´ Ð¿Ñ€ÑÐ¼Ð¾ÑƒÐ³Ð¾Ð»ÑŒÐ½Ð¸ÐºÐ¾Ð²: " << value1 << endl;
+    cout << "ÐœÐµÑ‚Ð¾Ð´ Ñ‚Ñ€Ð°Ð¿ÐµÑ†Ð¸Ð¹: " << value2 << endl;
+    cout << "ÐœÐµÑ‚Ð¾Ð´ Ð¡Ð¸Ð¼Ð¿ÑÐ¾Ð½Ð°: " << value3 << endl;
 
 	system("pause");
 
