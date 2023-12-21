@@ -1,12 +1,12 @@
 #include <cmath>
 
-//функция
+//С„СѓРЅРєС†РёСЏ
 double f(double x)
 {
 	return 1 / log(x);
 };
 
-//метод прямоугольников
+//РјРµС‚РѕРґ РїСЂСЏРјРѕСѓРіРѕР»СЊРЅРёРєРѕРІ
 double rectangleMethod(double lValue, double rValue, int n) {
     double h = (rValue - lValue) / n;
     double result = 0.0;
@@ -19,7 +19,7 @@ double rectangleMethod(double lValue, double rValue, int n) {
     return h * result;
 };
 
-//метод трапеций
+//РјРµС‚РѕРґ С‚СЂР°РїРµС†РёР№
 double trapezoidMethod(double lValue, double rValue, int n)
 {
     double h = (rValue - lValue) / n;
@@ -33,7 +33,7 @@ double trapezoidMethod(double lValue, double rValue, int n)
     return h * result;
 };
 
-//метод Симпсона
+//РјРµС‚РѕРґ РЎРёРјРїСЃРѕРЅР°
 double simpsonsMethod(double lValue, double rValue, int n)
 {
     double h = (rValue - lValue) / n;
