@@ -1,4 +1,4 @@
-﻿# CMakeList.txt: проект CMake для Polynomial; 
+# CMakeList.txt: проект CMake для Polynomial; 
 #
 cmake_minimum_required (VERSION 3.8)
 
@@ -10,7 +10,7 @@ endif()
 
 project ("Polynomial")
 
-add_executable (Polynomial "Polynomial.cpp" "Polynomial.h" "main.cpp")
+add_executable (Polynomial "Polynomial.cpp" "Polynomial.h" "main.cpp" "myFunctions.h")
 
 if (CMAKE_VERSION VERSION_GREATER 3.12)
   set_property(TARGET Polynomial PROPERTY CXX_STANDARD 20)
