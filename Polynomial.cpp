@@ -1,4 +1,4 @@
-﻿#include "Polynomial.h"
+#include "Polynomial.h"
 
 Polynomial::Polynomial()
 {
@@ -525,14 +525,14 @@ Polynomial Polynomial::polynomialLagrange(std::vector<double> vecX) const
 		{
 			if (i != j)
 			{
-				Polynomial numerator({ -vecX[j], 1});
+				Polynomial numerator({ -vecX[j], 1 });
 				Polynomial denominator({ vecX[i] - vecX[j] });
 				P = P * (numerator / denominator);
 			}
 		}
 		L = L + P * vecY[i];
 	}
-	
+
 	L.roundCoefficients(); //округление коэффициентов
 	L.removeLeadingZeros(); //удаление незначащих нулей
 
