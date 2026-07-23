@@ -27,12 +27,12 @@
 
 ## 🛠 Сборка
 
-`ash
+```bash
 git clone https://github.com/Vane4ka2k2/Polynomial.git
 cd Polynomial
 cmake -B build
 cmake --build build
-`
+```
 
 ---
 
