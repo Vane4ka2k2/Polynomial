@@ -1,6 +1,4 @@
-# CMakeList.txt: проект CMake для Polynomial; 
-#
-cmake_minimum_required (VERSION 3.8)
+cmake_minimum_required(VERSION 3.16)
 
 # Включение горячей перезагрузки для компиляторов MSVC, если поддерживается.
 if (POLICY CMP0141)
